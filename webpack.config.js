@@ -9,7 +9,7 @@ module.exports = {
     devtoolModuleFilenameTemplate: '[resourcePath]',
     devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
-  moedule: {
+  module: {
     loaders: [
       {
         test: /\.jsx?$/,
