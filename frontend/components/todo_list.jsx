@@ -1,6 +1,17 @@
 var React = require('react');
 var TodoStore = require('../stores/todo_store');
 
+var TodoListItem = React.createClass({
+  render: function() {
+    return(
+      <div>
+        <div><b>{ this.props.todo.title }</b></div>
+        <div>{ this.props.todo.body }</div>
+      </div>
+    )
+  }
+});
+
 var TodoList = React.createClass({
   getInitialState: function() {
     return {
@@ -20,11 +31,9 @@ var TodoList = React.createClass({
   render: function() {
     return(
       <div>
-        <ul>
-          { this.state.todos.map(function(todo, idx) {
-            return( <li key={ todo.id }>{ todo.title }</li> )
-          }.bind(this))}
-        </ul>
+        { this.state.todos.map(function(todo, idx) {
+          return( <TodoListItem key={ todo.id } todo={ todo }/> )
+        }.bind(this))}
       </div>
     )
   }
