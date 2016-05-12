@@ -5,7 +5,8 @@ var TodoForm = React.createClass({
   getInitialState: function() {
     return {
       title: '',
-      body: ''
+      body: '',
+      done: false
     }
   },
   updateTitle: function(e) {
@@ -15,8 +16,8 @@ var TodoForm = React.createClass({
     this.setState({ body: e.target.value })
   },
   handleSubmit: function(e) {
-    TodoStore.create({ title: this.state.title, body: this.state.body, done: false })
-    this.setState({ title: '', body: '' })
+    TodoStore.create( this.state )
+    this.setState( this.getInitialState() )
   },
   render: function() {
     return(
