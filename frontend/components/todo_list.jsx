@@ -3,11 +3,16 @@ var TodoStore = require('../stores/todo_store');
 var TodoForm = require('../components/todo_form');
 
 var TodoListItem = React.createClass({
+  handleDestroy: function(e) {
+    TodoStore.destroy(this.props.todo.id)
+  },
   render: function() {
     return(
       <div>
         <div><b>{ this.props.todo.title }</b></div>
         <div>{ this.props.todo.body }</div>
+        <input type='submit' value='Delete' onClick={ this.handleDestroy }></input>
+        <br /><br />
       </div>
     )
   }
