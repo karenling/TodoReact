@@ -1,5 +1,6 @@
 var React = require('react');
 var TodoStore = require('../stores/todo_store');
+var TodoForm = require('../components/todo_form');
 
 var TodoListItem = React.createClass({
   render: function() {
@@ -31,6 +32,7 @@ var TodoList = React.createClass({
   render: function() {
     return(
       <div>
+        <TodoForm></TodoForm>
         { this.state.todos.map(function(todo, idx) {
           return( <TodoListItem key={ todo.id } todo={ todo }/> )
         }.bind(this))}
