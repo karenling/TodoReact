@@ -26,22 +26,43 @@ var DoneButton = React.createClass({
   }
 });
 
-var TodoListItem = React.createClass({
+
+var TodoDetailView = React.createClass({
   handleDestroy: function(e) {
     TodoStore.destroy(this.props.todo.id)
   },
   render: function() {
     return(
       <div>
-        <div><b>{ this.props.todo.title }</b></div>
         <div>{ this.props.todo.body }</div>
-        <DoneButton todo={ this.props.todo }></DoneButton>
         <input type='submit' value='Delete' onClick={ this.handleDestroy }></input>
-        <br /><br />
       </div>
     )
   }
 });
+
+var TodoListItem = React.createClass({
+  getInitialState: function() {
+    return{
+      showDetails: false
+    }
+  },
+  showDetails: function() {
+    this.setState({ showDetails: !this.state.showDetails })
+  },
+  render: function() {
+    return(
+      <div>
+        <div onClick={ this.showDetails }><b>{ this.props.todo.title }</b></div>
+        <DoneButton todo={ this.props.todo }></DoneButton>
+        {this.state.showDetails ? <TodoDetailView todo={ this.props.todo }></TodoDetailView> : null }
+        <br /><br />
+      </div>
+    )
+
+  }
+});
+
 
 var TodoList = React.createClass({
   getInitialState: function() {
