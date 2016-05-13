@@ -23,9 +23,9 @@ var TodoForm = React.createClass({
     return(
       <div>
         <form onSubmit={ this.handleSubmit }>
-          <input type='text' placeholder='Title' onChange={ this.updateTitle } value={ this.state.title }></input>
-          <input type='text' placeholder='Body' onChange={ this.updateBody } value={ this.state.body }></input>
-          <input type='submit'></input>
+          <input type='text' className='form-control' placeholder='Title' onChange={ this.updateTitle } value={ this.state.title }></input>
+          <input type='text' className='form-control' placeholder='Body' onChange={ this.updateBody } value={ this.state.body }></input>
+          <input type='submit' className='btn btn-primary'></input>
         </form>
       </div>
     )

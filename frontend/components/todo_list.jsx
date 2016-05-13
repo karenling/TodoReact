@@ -1,68 +1,7 @@
 var React = require('react');
 var TodoStore = require('../stores/todo_store');
-var TodoForm = require('../components/todo_form');
-
-var DoneButton = React.createClass({
-  getInitialState: function() {
-    return {
-      done: this.props.todo.done
-    }
-  },
-  handleDone: function(e) {
-    e.preventDefault();
-    TodoStore.toggleDone(this.props.todo.id);
-    this.setState({ done: !this.state.done })
-  },
-  render: function() {
-    if (this.state.done) {
-      return(
-        <input type='submit' onClick={ this.handleDone } value='Undo'></input>
-      )
-    } else {
-      return(
-        <input type='submit' onClick={ this.handleDone } value='Done'></input>
-      )
-    }
-  }
-});
-
-
-var TodoDetailView = React.createClass({
-  handleDestroy: function(e) {
-    TodoStore.destroy(this.props.todo.id)
-  },
-  render: function() {
-    return(
-      <div>
-        <div>{ this.props.todo.body }</div>
-        <input type='submit' value='Delete' onClick={ this.handleDestroy }></input>
-      </div>
-    )
-  }
-});
-
-var TodoListItem = React.createClass({
-  getInitialState: function() {
-    return{
-      showDetails: false
-    }
-  },
-  showDetails: function() {
-    this.setState({ showDetails: !this.state.showDetails })
-  },
-  render: function() {
-    return(
-      <div>
-        <div onClick={ this.showDetails }><b>{ this.props.todo.title }</b></div>
-        <DoneButton todo={ this.props.todo }></DoneButton>
-        {this.state.showDetails ? <TodoDetailView todo={ this.props.todo }></TodoDetailView> : null }
-        <br /><br />
-      </div>
-    )
-
-  }
-});
-
+var TodoForm = require('./todo_form');
+var TodoListItem = require('./todo_list_item');
 
 var TodoList = React.createClass({
   getInitialState: function() {
@@ -82,11 +21,11 @@ var TodoList = React.createClass({
   },
   render: function() {
     return(
-      <div>
-        <TodoForm></TodoForm>
+      <div className='col-xs-4 col-xs-offset-4'>
         { this.state.todos.map(function(todo, idx) {
           return( <TodoListItem key={ todo.id } todo={ todo }/> )
         }.bind(this))}
+        <TodoForm></TodoForm>
       </div>
     )
   }
